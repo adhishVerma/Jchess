@@ -14,14 +14,14 @@ public abstract class Tile {
 
     private static Map<Integer, EmptyTile> createAllPossibleEmptyTiles() {
         final Map<Integer, EmptyTile> emptyTilesMap = new HashMap<>();
-        for(int i=0; i < 64; i++){
+        for(int i=0; i < BoardUtils.NUM_TILES; i++){
             emptyTilesMap.put(i, new EmptyTile(i));
         }
         return Collections.unmodifiableMap(emptyTilesMap);
     }
 
     //Constructor
-    private Tile(int tileCoordinate){
+    private Tile(final int tileCoordinate){
         this.tileCoordinate = tileCoordinate;
     }
 
@@ -52,7 +52,7 @@ public abstract class Tile {
     public  static final class OccupiedTile extends Tile{
         private final Piece piece;
 
-        private OccupiedTile(final int coordinate, Piece piece){
+        private OccupiedTile(final int coordinate, final Piece piece){
             super(coordinate);
             this.piece = piece;
         }
