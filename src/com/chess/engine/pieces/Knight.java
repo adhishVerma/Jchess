@@ -11,6 +11,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import static com.chess.engine.board.Move.*;
+
 public class Knight extends Piece {
 
     private final static  int[] CANDIDATE_MOVE_COORDINATES = {-17,15,-10,-6,6,10,15,17};
@@ -24,7 +26,7 @@ public class Knight extends Piece {
         for(final int currentCandidateOffset : CANDIDATE_MOVE_COORDINATES){
             final int candidateDestinationCoordinate = this.piecePosition+currentCandidateOffset;
 
-            if(BoardUtils.moveIsValid(candidateDestinationCoordinate)){
+            if(BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)){
                 if(isFirstColumnExclusion(this.piecePosition, currentCandidateOffset)
                         || isSecondColumnExclusion(this.piecePosition, currentCandidateOffset)
                         || isSeventhColumnExclusion(this.piecePosition, currentCandidateOffset)
@@ -34,12 +36,12 @@ public class Knight extends Piece {
 
                 final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate);
                 if(!candidateDestinationTile.isTileOccupied()){
-                    legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate));
+                    legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
                 }else{
                     final Piece pieceAtDestination = candidateDestinationTile.getPiece();
                     final Alliance pieceALliance = pieceAtDestination.getPieceAlliance();
                     if(this.pieceAlliance != pieceALliance){
-                        legalMoves.add(new Move.AttackingMove(board, this, candidateDestinationCoordinate, pieceAtDestination));
+                        legalMoves.add(new AttackingMove(board, this, candidateDestinationCoordinate, pieceAtDestination));
                     }
                 }
             }

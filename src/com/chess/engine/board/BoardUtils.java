@@ -22,7 +22,7 @@ public class BoardUtils {
         throw new RuntimeException("You cant instantiate board-utils!");
     }
 
-    public static boolean moveIsValid(int coordinate) {
+    public static boolean isValidTileCoordinate(int coordinate) {
         return coordinate >= 0 && coordinate < 64;
     }
 }
