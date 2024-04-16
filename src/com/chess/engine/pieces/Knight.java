@@ -11,7 +11,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import static com.chess.engine.board.Move.*;
+import static com.chess.engine.board.Move.AttackingMove;
+import static com.chess.engine.board.Move.MajorMove;
 
 public class Knight extends Piece {
 
