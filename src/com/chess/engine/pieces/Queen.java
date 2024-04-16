@@ -14,7 +14,7 @@ import java.util.List;
 public class Queen extends Piece{
 
     private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-9,-8,-7,-1,1,7,8,9};
-    Queen(int piecePos, Alliance pieceAlliance) {
+    public Queen(int piecePos, Alliance pieceAlliance) {
         super(piecePos, pieceAlliance);
     }
 
@@ -45,7 +45,10 @@ public class Queen extends Piece{
         }
         return Collections.unmodifiableList(legalMoves);
     }
-
+    @Override
+    public String toString(){
+        return PieceType.QUEEN.toString();
+    }
     private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset){
         return BoardUtils.FIRST_COLUMN[currentPosition] && (candidateOffset == -9 || candidateOffset == -1 || candidateOffset == 7);
     }

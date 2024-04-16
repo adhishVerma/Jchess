@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Pawn extends Piece{
     private final static int[] CANDIDATE_MOVE_VECTOR = {7, 9, 8,16};
-    Pawn(final int piecePos, final Alliance pieceAlliance) {
+    public Pawn(final int piecePos, final Alliance pieceAlliance) {
         super(piecePos, pieceAlliance);
     }
 
@@ -58,5 +58,9 @@ public class Pawn extends Piece{
             }
         }
         return Collections.unmodifiableList(legalMoves);
+    }
+    @Override
+    public String toString(){
+        return PieceType.PAWN.toString();
     }
 }

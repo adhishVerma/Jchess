@@ -28,7 +28,6 @@ public abstract class Tile {
     public static Tile createTile(final int tileCoordinate, Piece piece){
         return piece != null ? new OccupiedTile(tileCoordinate, piece) : EMPTY_TILES_CACHE.get(tileCoordinate);
     }
-
     public abstract boolean isTileOccupied();
 
     public abstract Piece getPiece();
@@ -38,6 +37,10 @@ public abstract class Tile {
             super(coordinate);
         }
 
+        @Override
+        public String toString(){
+            return "-";
+        }
         @Override
         public boolean isTileOccupied(){
             return false;
@@ -55,6 +58,11 @@ public abstract class Tile {
         private OccupiedTile(final int coordinate, final Piece piece){
             super(coordinate);
             this.piece = piece;
+        }
+        @Override
+        public String toString(){
+            return getPiece().getPieceAlliance().isBlack() ? getPiece().toString().toLowerCase() :
+                    getPiece().toString();
         }
         @Override
         public boolean isTileOccupied() {

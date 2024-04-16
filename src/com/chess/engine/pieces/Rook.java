@@ -14,7 +14,7 @@ public class Rook extends Piece{
 
     private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-8,-1,1,8};
 
-    Rook(int piecePos, Alliance pieceAlliance) {
+    public Rook(int piecePos, Alliance pieceAlliance) {
         super(piecePos, pieceAlliance);
     }
 
@@ -46,7 +46,10 @@ public class Rook extends Piece{
         }
         return legalMoves;
     }
-
+    @Override
+    public String toString(){
+        return PieceType.ROOK.toString();
+    }
     private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset){
         return BoardUtils.FIRST_COLUMN[currentPosition] && (candidateOffset == -1);
     }

@@ -17,7 +17,7 @@ import static com.chess.engine.board.Move.MajorMove;
 public class Knight extends Piece {
 
     private final static  int[] CANDIDATE_MOVE_COORDINATES = {-17,15,-10,-6,6,10,15,17};
-    Knight(final int piecePos, final Alliance pieceAlliance) {
+    public Knight(final int piecePos, final Alliance pieceAlliance) {
         super(piecePos, pieceAlliance);
     }
 
@@ -49,7 +49,10 @@ public class Knight extends Piece {
         }
         return Collections.unmodifiableList(legalMoves);
     }
-
+    @Override
+    public String toString(){
+        return PieceType.KNIGHT.toString();
+    }
     private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset){
         return BoardUtils.FIRST_COLUMN[currentPosition] && ((candidateOffset == -17)
                 || (candidateOffset == -10)

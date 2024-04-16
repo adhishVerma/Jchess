@@ -17,7 +17,7 @@ public class Bishop extends Piece{
 
     private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-9,-7,7,9};
 
-    Bishop(final int piecePos, final Alliance pieceAlliance){
+    public Bishop(final int piecePos, final Alliance pieceAlliance){
         super(piecePos, pieceAlliance);
     }
     @Override
@@ -48,7 +48,10 @@ public class Bishop extends Piece{
         }
         return Collections.unmodifiableList(legalMoves);
     }
-
+    @Override
+    public String toString(){
+        return PieceType.BISHOP.toString();
+    }
     private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset){
         return BoardUtils.FIRST_COLUMN[currentPosition] && (candidateOffset == -9 || candidateOffset == 7);
     }
