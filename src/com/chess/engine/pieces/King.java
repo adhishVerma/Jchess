@@ -17,7 +17,7 @@ public class King extends Piece{
 
     private final static int[] CANDIDATE_MOVE_COORDINATE = {-9,-8,-7,-1,1,7,8,9};
     public King(int piecePos, Alliance pieceAlliance) {
-        super(piecePos, pieceAlliance);
+        super(piecePos, pieceAlliance, PieceType.KING);
     }
 
     @Override

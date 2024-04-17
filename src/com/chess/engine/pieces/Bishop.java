@@ -18,7 +18,7 @@ public class Bishop extends Piece{
     private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-9,-7,7,9};
 
     public Bishop(final int piecePos, final Alliance pieceAlliance){
-        super(piecePos, pieceAlliance);
+        super(piecePos, pieceAlliance, PieceType.BISHOP);
     }
     @Override
     public Collection<Move> calculateLegalMoves(final Board board) {
@@ -48,6 +48,7 @@ public class Bishop extends Piece{
         }
         return Collections.unmodifiableList(legalMoves);
     }
+
     @Override
     public String toString(){
         return PieceType.BISHOP.toString();
