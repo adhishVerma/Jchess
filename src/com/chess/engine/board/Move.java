@@ -16,6 +16,9 @@ public abstract class Move {
     public int getDestinationTile(){
         return this.destinationTile;
     }
+    public Piece getMovedPiece(){
+        return this.movedPiece;
+    }
 
     public abstract Board execute();
 
@@ -51,7 +54,7 @@ public abstract class Move {
             for (final Piece piece : this.board.getActivePlayer().getOpponent().getActivePieces()){
                 builder.setPiece(piece);
             }
-            //Moving the piece here
+            //Moving the piece happens here
             builder.setPiece(null);
             builder.setMoveMaker(this.board.getActivePlayer().getOpponent().getAlliance());
             return builder.build();

@@ -50,6 +50,10 @@ public class Knight extends Piece {
         return Collections.unmodifiableList(legalMoves);
     }
     @Override
+    public Knight movePiece(final Move move) {
+        return new Knight(move.getDestinationTile(), move.getMovedPiece().getPieceAlliance());
+    }
+    @Override
     public String toString(){
         return PieceType.KNIGHT.toString();
     }

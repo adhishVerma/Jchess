@@ -47,6 +47,10 @@ public class King extends Piece{
         return Collections.unmodifiableList(legalMoves);
     }
     @Override
+    public King movePiece(final Move move) {
+        return new King(move.getDestinationTile(), move.getMovedPiece().getPieceAlliance());
+    }
+    @Override
     public String toString(){
         return PieceType.KING.toString();
     }
