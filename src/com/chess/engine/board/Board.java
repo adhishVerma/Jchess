@@ -116,6 +116,14 @@ public class Board {
 
         return builder.build();
     }
+
+    public Iterable<Move> getAllLegalMoves() {
+        List<Move> moveList = new ArrayList<>();
+        moveList.addAll(this.whitePlayer.getLegalMoves());
+        moveList.addAll(this.blackPlayer.getLegalMoves());
+        return Collections.unmodifiableList(moveList);
+    }
+
     public static class Builder {
         Map<Integer, Piece> boardConfig;
         Alliance nextMoveMaker;
