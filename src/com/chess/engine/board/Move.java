@@ -55,7 +55,7 @@ public abstract class Move {
                 builder.setPiece(piece);
             }
             //Moving the piece happens here
-            builder.setPiece(null);
+            builder.setPiece(this.movedPiece.movePiece(this));
             builder.setMoveMaker(this.board.getActivePlayer().getOpponent().getAlliance());
             return builder.build();
         }
