@@ -23,7 +23,7 @@ public abstract class Player {
            final Collection<Move> opponentMoves){
         this.board = board;
         this.playerKing = establishKing();
-        this.legalMoves = legalMoves;
+        this.legalMoves = newLegalMoves(legalMoves,opponentMoves);
         this.opponentMoves = opponentMoves;
         this.isInCheck = !Player.calculateAttacksOnTile(this.getPlayerKing().getPiecePosition(), opponentMoves).isEmpty();
     }
@@ -76,7 +76,12 @@ public abstract class Player {
         }
         return false;
     }
-
+    private Collection<Move> newLegalMoves(Collection<Move>legalMoves, Collection<Move>opponentMoves){
+        final List<Move> totalMoves = new ArrayList<>();
+        totalMoves.addAll(legalMoves);
+        totalMoves.addAll(calculateKingCastles(legalMoves, opponentMoves));
+        return Collections.unmodifiableList(totalMoves);
+    }
     public boolean isInStaleMate(){
         return !this.isInCheck && !hasEscapeMoves();
     }

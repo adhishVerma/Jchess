@@ -24,7 +24,9 @@ public abstract class Tile {
     private Tile(final int tileCoordinate){
         this.tileCoordinate = tileCoordinate;
     }
-
+    public int getTileCoordinate(){
+        return this.tileCoordinate;
+    }
     public static Tile createTile(final int tileCoordinate, Piece piece){
         return piece != null ? new OccupiedTile(tileCoordinate, piece) : EMPTY_TILES_CACHE.get(tileCoordinate);
     }
