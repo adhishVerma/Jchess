@@ -3,6 +3,7 @@ package com.chess.engine.board;
 import com.chess.engine.board.Board.Builder;
 import com.chess.engine.pieces.Pawn;
 import com.chess.engine.pieces.Piece;
+import com.chess.engine.pieces.Rook;
 
 public abstract class Move {
     final Board board;
@@ -160,22 +161,76 @@ public abstract class Move {
     }
 
     static abstract class CastleMove extends Move{
+        protected final Rook castleRook;
+        protected final int castleRookStart;
+        protected final int castleRookDestination;
+
         public CastleMove(final Board board,
                          final Piece movedPiece,
-                         final int destinationTile){
+                         final int destinationTile,
+                         final Rook castleRook,
+                         final int castleRookStart,
+                         final int castleRookDestination){
             super(board,movedPiece, destinationTile);
+            this.castleRook = castleRook;
+            this.castleRookStart = castleRookStart;
+            this.castleRookDestination = castleRookDestination;
+        }
+        public Rook getCastleRook(){
+            return this.castleRook;
+        }
+        @Override
+        public boolean isCastlingMove(){
+            return true;
+        }
+        @Override
+        public Board execute(){
+            final Builder builder = new Builder();
+            for(final Piece piece : this.board.getActivePlayer().getActivePieces()){
+                if(!this.movedPiece.equals(piece)){
+                    builder.setPiece(piece);
+                }
+            }
+            for(final Piece piece : this.board.getActivePlayer().getOpponent().getActivePieces()){
+                builder.setPiece(piece);
+            }
+            //Move the king with move-piece method
+            builder.setPiece(this.movedPiece.movePiece(this));
+            //Create a new Rook on the board
+            //TODO : first move change of the new rook.
+            builder.setPiece(new Rook(this.castleRookDestination, this.castleRook.getPieceAlliance()));
+            builder.setMoveMaker(this.board.getActivePlayer().getOpponent().getAlliance());
+            return builder.build();
         }
     }
 
     public static final class KingSideCastleMove extends CastleMove {
-        public KingSideCastleMove(Board board, Piece movedPiece, int destinationTile) {
-            super(board, movedPiece, destinationTile);
+        public KingSideCastleMove(Board board,
+                                  Piece movedPiece,
+                                  int destinationTile,
+                                  final Rook castleRook,
+                                  final int castleRookStart,
+                                  final int castleRookDestination) {
+            super(board, movedPiece, destinationTile, castleRook, castleRookStart, castleRookDestination);
+        }
+        @Override
+        public String toString(){
+            return "0-0";
         }
     }
 
     public static final class QueenSideCastleMove extends CastleMove {
-        public QueenSideCastleMove(Board board, Piece movedPiece, int destinationTile) {
-            super(board, movedPiece, destinationTile);
+        public QueenSideCastleMove(Board board,
+                                   Piece movedPiece,
+                                   int destinationTile,
+                                   final Rook castleRook,
+                                   final int castleRookStart,
+                                   final int castleRookDestination) {
+            super(board, movedPiece, destinationTile, castleRook, castleRookStart, castleRookDestination);
+        }
+        @Override
+        public String toString(){
+            return "0-0-0";
         }
     }
     public static final class NullMove extends Move {
