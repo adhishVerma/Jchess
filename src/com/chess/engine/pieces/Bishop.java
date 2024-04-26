@@ -18,7 +18,10 @@ public class Bishop extends Piece{
     private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-9,-7,7,9};
 
     public Bishop(final int piecePos, final Alliance pieceAlliance){
-        super(piecePos, pieceAlliance, PieceType.BISHOP);
+        super(piecePos, pieceAlliance, PieceType.BISHOP, true);
+    }
+    public Bishop(final int piecePos, final Alliance pieceAlliance, final boolean isFirstMove){
+        super(piecePos, pieceAlliance, PieceType.BISHOP, isFirstMove);
     }
     @Override
     public Collection<Move> calculateLegalMoves(final Board board) {
@@ -39,7 +42,7 @@ public class Bishop extends Piece{
                         final Piece pieceAtDestination = candidateDestinationTile.getPiece();
                         final Alliance pieceALliance = pieceAtDestination.getPieceAlliance();
                         if(this.pieceAlliance != pieceALliance){
-                            legalMoves.add(new AttackingMove(board, this, candidateDestinationCoordinate, pieceAtDestination));
+                            legalMoves.add(new MajorAttackMove(board, this, candidateDestinationCoordinate, pieceAtDestination));
                         }
                         break;
                     }

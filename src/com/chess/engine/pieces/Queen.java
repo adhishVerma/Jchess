@@ -4,6 +4,8 @@ import com.chess.engine.Alliance;
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
+import com.chess.engine.board.Move.AttackMove;
+import com.chess.engine.board.Move.MajorAttackMove;
 import com.chess.engine.board.Tile;
 
 import java.util.ArrayList;
@@ -15,7 +17,10 @@ public class Queen extends Piece{
 
     private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-9,-8,-7,-1,1,7,8,9};
     public Queen(final int piecePos, final Alliance pieceAlliance) {
-        super(piecePos, pieceAlliance, PieceType.QUEEN);
+        super(piecePos, pieceAlliance, PieceType.QUEEN, true);
+    }
+    public Queen(final int piecePos, final Alliance pieceAlliance, final boolean isFirstMove) {
+        super(piecePos, pieceAlliance, PieceType.QUEEN, isFirstMove);
     }
 
     public Collection<Move> calculateLegalMoves(final Board board) {
@@ -36,7 +41,7 @@ public class Queen extends Piece{
                         final Piece pieceAtDestination = candidateDestinationTile.getPiece();
                         final Alliance pieceALliance = pieceAtDestination.getPieceAlliance();
                         if(this.pieceAlliance != pieceALliance){
-                            legalMoves.add(new Move.AttackingMove(board, this, candidateDestinationCoordinate, pieceAtDestination));
+                            legalMoves.add(new MajorAttackMove(board, this, candidateDestinationCoordinate, pieceAtDestination));
                         }
                         break;
                     }

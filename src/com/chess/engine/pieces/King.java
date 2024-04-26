@@ -4,7 +4,8 @@ import com.chess.engine.Alliance;
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
-import com.chess.engine.board.Move.AttackingMove;
+import com.chess.engine.board.Move.AttackMove;
+import com.chess.engine.board.Move.MajorAttackMove;
 import com.chess.engine.board.Move.MajorMove;
 import com.chess.engine.board.Tile;
 
@@ -17,7 +18,11 @@ public class King extends Piece{
 
     private final static int[] CANDIDATE_MOVE_COORDINATE = {-9,-8,-7,-1,1,7,8,9};
     public King(final int piecePos, final Alliance pieceAlliance) {
-        super(piecePos, pieceAlliance, PieceType.KING);
+        super(piecePos, pieceAlliance, PieceType.KING, true);
+    }
+
+    public King(final int piecePos, final Alliance pieceAlliance, final boolean isFirstMove) {
+        super(piecePos, pieceAlliance, PieceType.KING, isFirstMove);
     }
 
     @Override
@@ -37,7 +42,7 @@ public class King extends Piece{
                     final Piece pieceAtDestination = candidateDestinationTile.getPiece();
                     final Alliance pieceALliance = pieceAtDestination.getPieceAlliance();
                     if(this.pieceAlliance != pieceALliance){
-                        legalMoves.add(new AttackingMove(board, this, candidateDestinationCoordinate, pieceAtDestination));
+                        legalMoves.add(new MajorAttackMove(board, this, candidateDestinationCoordinate, pieceAtDestination));
                     }
                 }
             }

@@ -4,6 +4,7 @@ import com.chess.engine.Alliance;
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
+import com.chess.engine.board.Move.MajorAttackMove;
 import com.chess.engine.board.Tile;
 
 import java.util.ArrayList;
@@ -11,14 +12,17 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import static com.chess.engine.board.Move.AttackingMove;
+import static com.chess.engine.board.Move.AttackMove;
 import static com.chess.engine.board.Move.MajorMove;
 
 public class Knight extends Piece {
 
-    private final static  int[] CANDIDATE_MOVE_COORDINATES = {-17,15,-10,-6,6,10,15,17};
+    private final static  int[] CANDIDATE_MOVE_COORDINATES = {-17,-15,-10,-6,6,10,15,17};
     public Knight(final int piecePos, final Alliance pieceAlliance) {
-        super(piecePos, pieceAlliance, PieceType.KNIGHT);
+        super(piecePos, pieceAlliance, PieceType.KNIGHT, true);
+    }
+    public Knight(final int piecePos, final Alliance pieceAlliance, final boolean isFirstMove) {
+        super(piecePos, pieceAlliance, PieceType.KNIGHT, isFirstMove);
     }
 
     @Override
@@ -42,7 +46,7 @@ public class Knight extends Piece {
                     final Piece pieceAtDestination = candidateDestinationTile.getPiece();
                     final Alliance pieceALliance = pieceAtDestination.getPieceAlliance();
                     if(this.pieceAlliance != pieceALliance){
-                        legalMoves.add(new AttackingMove(board, this, candidateDestinationCoordinate, pieceAtDestination));
+                        legalMoves.add(new MajorAttackMove(board, this, candidateDestinationCoordinate, pieceAtDestination));
                     }
                 }
             }
