@@ -200,12 +200,12 @@ public abstract class Move {
                 builder.setPiece(piece);
             }
             builder.setPiece(this.promotedPawn.getPromotionPiece().movePiece(this));
-            builder.setMoveMaker(pawnMovedBoard.getActivePlayer().getOpponent().getAlliance());
+            builder.setMoveMaker(pawnMovedBoard.getActivePlayer().getAlliance());
             return builder.build();
         };
         @Override
         public String toString(){
-            return "";
+            return BoardUtils.getPositionAtCoordinate(this.decoratedMove.getDestinationTile())+"="+"Q";
         };
         @Override
         public int hashCode(){
