@@ -74,6 +74,12 @@ public class Board {
     public Collection<Piece> getWhitePieces(){
         return this.whitePieces;
     }
+    public Collection<Piece> getAllPieces(){
+        ArrayList<Piece> allPieces = new ArrayList<>();
+        allPieces.addAll(this.whitePieces);
+        allPieces.addAll(this.blackPieces);
+        return Collections.unmodifiableList(allPieces);
+    }
     public Player getBlackPlayer(){
         return this.blackPlayer;
     }
